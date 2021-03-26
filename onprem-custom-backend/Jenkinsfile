@@ -20,6 +20,10 @@ node() {
   }
 
   stage("Prepare") {
+    sh """set -e
+    echo "OpenAPI URL is ${params.PRIVATE_BASE_URL}${params.PRIVATE_BASE_OPENAPI}"
+    curl -sfk -w  -o openapi.json ${params.PRIVATE_BASE_URL}${params.PRIVATE_BASE_OPENAPI}
+    """
     service = toolbox.prepareThreescaleService(
         //openapi: [filename: "hybrid-usecase-open/swagger.json"],
         openapi: [filename: "openapi.json"],
