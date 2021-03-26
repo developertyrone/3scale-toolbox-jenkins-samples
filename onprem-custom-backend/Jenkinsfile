@@ -6,16 +6,21 @@ library identifier: '3scale-toolbox-jenkins@master',
                               traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]])
 
 def service = null
+def response = httpRequest params.PRIVATE_BASE_URL + params.PRIVATE_BASE_OPENAPI
 
 node() {
   stage('Checkout Source') {
     checkout scm
   }
 
+  stage('Checkout OpenAPI') {
+     writeFile file: 'openapi.json', text: response.content
+  }
+
   stage("Prepare") {
     service = toolbox.prepareThreescaleService(
         //openapi: [filename: "hybrid-usecase-open/swagger.json"],
-        openapi: [filename: params.PRIVATE_BASE_URL + params.PRIVATE_BASE_OPENAPI],
+        openapi: [filename: "openapi.json"],
         environment: [ baseSystemName: "onprem_custom_backend",
                        privateBaseUrl: params.PRIVATE_BASE_URL,
                        privateBasePath: "/api"],
