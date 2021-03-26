@@ -15,7 +15,7 @@ node() {
   stage("Prepare") {
     service = toolbox.prepareThreescaleService(
         //openapi: [filename: "hybrid-usecase-open/swagger.json"],
-        openapi: [params.PRIVATE_BASE_URL + params.PRIVATE_BASE_OPENAPI],
+        openapi: [filename: params.PRIVATE_BASE_URL + params.PRIVATE_BASE_OPENAPI],
         environment: [ baseSystemName: "onprem_custom_backend",
                        privateBaseUrl: params.PRIVATE_BASE_URL,
                        privateBasePath: "/api"],
