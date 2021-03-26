@@ -6,7 +6,6 @@ library identifier: '3scale-toolbox-jenkins@master',
                               traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]])
 
 def service = null
-def response = httpRequest params.PRIVATE_BASE_URL + params.PRIVATE_BASE_OPENAPI
 
 node() {
   stage('Checkout Source') {
@@ -14,7 +13,10 @@ node() {
   }
 
   stage('Checkout OpenAPI') {
-     writeFile file: 'openapi.json', text: response.content
+    sh """set -e
+    echo "OpenAPI URL is ${proxy.PRIVATE_BASE_URL}${params.PRIVATE_BASE_OPENAPI}"
+    curl -sfk -w  -o openapi.json ${proxy.PRIVATE_BASE_URL}${params.PRIVATE_BASE_OPENAPI}
+    """
   }
 
   stage("Prepare") {
