@@ -17,7 +17,7 @@ node() {
         openapi: [filename: "hybrid-usecase-open/swagger.json"],
         environment: [ baseSystemName: "onprem_simple",
                        privateBaseUrl: params.PRIVATE_BASE_URL,
-                       privateBasePath: "/api"],
+                       privateBasePath: "/petclinic"],
                        //publicStagingWildcardDomain: params.PUBLIC_STAGING_WILDCARD_DOMAIN,
                        //publicProductionWildcardDomain: params.PUBLIC_PRODUCTION_WILDCARD_DOMAIN ,
         toolbox: [ openshiftProject: params.NAMESPACE,
