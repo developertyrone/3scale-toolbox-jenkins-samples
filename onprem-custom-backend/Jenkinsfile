@@ -27,7 +27,7 @@ node() {
         openapi: [filename: "openapi.json"],
         environment: [ baseSystemName: "onprem_custom_backend",
                        privateBaseUrl: params.PRIVATE_BASE_URL,
-                       privateBasePath: "/petclinic"],
+                       privateBasePath: "/api"],
                        //publicStagingWildcardDomain: params.PUBLIC_STAGING_WILDCARD_DOMAIN,
                        //publicProductionWildcardDomain: params.PUBLIC_PRODUCTION_WILDCARD_DOMAIN ,
         toolbox: [ openshiftProject: params.NAMESPACE,
